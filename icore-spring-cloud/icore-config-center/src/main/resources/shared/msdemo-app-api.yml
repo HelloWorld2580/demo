@@ -1,0 +1,3 @@
+server:
+  context-path: /msdemo-app-api
+  port: 4000

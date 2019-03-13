@@ -1,0 +1,132 @@
+{
+  "checkCount": 30,
+  "hardCheckCount": 16,
+  "violationCount": 0,
+  "violationEffectRowCount": 0,
+  "blackListHitCount": 0,
+  "blackListSize": 0,
+  "whiteListHitCount": 14,
+  "whiteListSize": 16,
+  "syntaxErrorCount": 0,
+  "tables": [
+    {
+      "name": "schemata",
+      "selectCount": 1,
+      "fetchRowCount": 1,
+      "fetchRowCountHistogram": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "user_userinfo",
+      "insertCount": 3,
+      "createCount": 1
+    },
+    {
+      "name": "tables",
+      "selectCount": 1
+    },
+    {
+      "name": "\"demo_schema_version\"",
+      "selectCount": 10,
+      "insertCount": 2,
+      "updateCount": 2,
+      "fetchRowCount": 3,
+      "fetchRowCountHistogram": [
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "user",
+      "invokeCount": 2
+    }
+  ],
+  "blackList": [],
+  "whiteList": [
+    {
+      "sql": "SELECT ?",
+      "sample": "select 1",
+      "executeCount": 5
+    },
+    {
+      "sql": "SELECT COUNT(*) FROM INFORMATION_SCHEMA.schemata WHERE schema_name=?",
+      "executeCount": 1,
+      "fetchRowCount": 1
+    },
+    {
+      "sql": "SELECT TABLE_NAME\nFROM INFORMATION_SCHEMA.TABLEs\nWHERE TABLE_schema = ?\n\tAND TABLE_TYPE = ?",
+      "sample": "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLEs WHERE TABLE_schema = ? AND TABLE_TYPE = 'TABLE'",
+      "executeCount": 1
+    },
+    {
+      "sql": "CREATE TABLE \"PUBLIC\".\"DEMO_SCHEMA_VERSION\" (\n    \"version_rank\" INT NOT NULL,\n    \"installed_rank\" INT NOT NULL,\n    \"version\" VARCHAR(50) NOT NULL,\n    \"description\" VARCHAR(200) NOT NULL,\n    \"type\" VARCHAR(20) NOT NULL,\n    \"script\" VARCHAR(1000) NOT NULL,\n    \"checksum\" INT,\n    \"installed_by\" VARCHAR(100) NOT NULL,\n    \"installed_on\" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,\n    \"execution_time\" INT NOT NULL,\n    \"success\" BOOLEAN NOT NULL\n)",
+      "executeCount": 1
+    },
+    {
+      "sql": "ALTER TABLE \"PUBLIC\".\"DEMO_SCHEMA_VERSION\" ADD CONSTRAINT \"DEMO_SCHEMA_VERSION_pk\" PRIMARY KEY (\"version\")",
+      "executeCount": 1
+    },
+    {
+      "sql": "CREATE INDEX \"PUBLIC\".\"DEMO_SCHEMA_VERSION_vr_idx\" ON \"PUBLIC\".\"DEMO_SCHEMA_VERSION\" (\"version_rank\")",
+      "executeCount": 1
+    },
+    {
+      "sql": "CREATE INDEX \"PUBLIC\".\"DEMO_SCHEMA_VERSION_ir_idx\" ON \"PUBLIC\".\"DEMO_SCHEMA_VERSION\" (\"installed_rank\")",
+      "executeCount": 1
+    },
+    {
+      "sql": "CREATE INDEX \"PUBLIC\".\"DEMO_SCHEMA_VERSION_s_idx\" ON \"PUBLIC\".\"DEMO_SCHEMA_VERSION\" (\"success\")",
+      "executeCount": 1
+    },
+    {
+      "sql": "select * from \"PUBLIC\".\"DEMO_SCHEMA_VERSION\" for update",
+      "executeCount": 3
+    },
+    {
+      "sql": "SELECT \"version_rank\",\"installed_rank\",\"version\",\"description\",\"type\",\"script\",\"checksum\",\"installed_on\",\"installed_by\",\"execution_time\",\"success\" FROM \"PUBLIC\".\"DEMO_SCHEMA_VERSION\" ORDER BY \"version_rank\"",
+      "executeCount": 3
+    },
+    {
+      "sql": "CREATE TABLE user_userinfo\n(\n\tuser_id varchar(255) primary key not null ,\n\tusername varchar(255),\n\tpassword varchar(255),\n\tmobilephone varchar(255),\n\tcity varchar(255),\n\tname varchar(255),\n\tnickname varchar(255),\n\tsex varchar(10),\n\taddr varchar(255),\n\temail varchar(255)\n)",
+      "executeCount": 1
+    },
+    {
+      "sql": "select \"version\" from \"PUBLIC\".\"DEMO_SCHEMA_VERSION\"",
+      "executeCount": 2,
+      "fetchRowCount": 1
+    },
+    {
+      "sql": "UPDATE \"PUBLIC\".\"DEMO_SCHEMA_VERSION\"\nSET \"version_rank\" = \"version_rank\" + ?\nWHERE \"version_rank\" >= ?",
+      "sample": "UPDATE \"PUBLIC\".\"DEMO_SCHEMA_VERSION\" SET \"version_rank\" = \"version_rank\" + 1 WHERE \"version_rank\" >= ?",
+      "executeCount": 2
+    },
+    {
+      "sql": "SELECT MAX(\"installed_rank\") FROM \"PUBLIC\".\"DEMO_SCHEMA_VERSION\"",
+      "executeCount": 2,
+      "fetchRowCount": 2
+    },
+    {
+      "sql": "INSERT INTO \"PUBLIC\".\"DEMO_SCHEMA_VERSION\" (\"version_rank\",\"installed_rank\",\"version\",\"description\",\"type\",\"script\",\"checksum\",\"installed_by\",\"execution_time\",\"success\") VALUES (?, ?, ?, ?, ?, ?, ?, USER(), ?, ?)",
+      "executeCount": 2,
+      "updateCount": 2
+    },
+    {
+      "sql": "INSERT INTO user_userinfo\nVALUES (?, ?, ?, ?, ?\n\t\t, ?, ?, ?, ?, ?)",
+      "sample": "insert into user_userinfo values ('000000000','admin1','abc','13810001000','鍖椾含','Ziv','Ziv','1','瑗垮煄','abc@abc.com')",
+      "executeCount": 3,
+      "updateCount": 3
+    }
+  ]
+}

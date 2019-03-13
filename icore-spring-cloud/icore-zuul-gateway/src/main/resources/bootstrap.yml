@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: msdemo-zuul-gateway
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: msdemo-config-center
+      profile: dev
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://dhcc:dhcc123@localhost:8761/eureka/,http://dhcc:dhcc123@localhost:8762/eureka/

@@ -1,0 +1,8 @@
+server:
+  context-path: /msdemo-app-api
+  port: 4001
+  
+eureka:
+  instance:
+    metadata-map:
+      cluster: MSDEMO-APP-API

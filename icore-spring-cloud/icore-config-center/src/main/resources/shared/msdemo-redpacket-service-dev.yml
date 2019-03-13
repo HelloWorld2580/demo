@@ -1,0 +1,68 @@
+server:
+  context-path: /msdemo-redpacket-service
+  port: 8220
+
+#数据库版本管理
+flyway:
+  enabled: false
+  table: DEMO_SCHEMA_VERSION
+
+
+spring:
+  datasource:
+    #JDBC-MySQL
+    url: jdbc:mysql:///TCC_RED?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    #JDBC-H2
+    #url: jdbc:h2:file:./user-db
+    #username: sa
+    #password: sa
+    #driver-class-name: org.h2.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 连接池配置,下面配置说明请参考Druid Github Wiki，配置_DruidDataSource参考配置
+    druid:
+      initialSize: 5
+      minIdle: 5
+      maxActive: 10
+      min-evictable-idle-time-millis: 100000
+      validation-query: select 1
+      ######Druid监控配置######
+      #下面配置说明请参考Druid Github Wiki，配置_配置WebStatFilter
+      web-stat-filter:
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+      #下面配置说明请参考Druid Github Wiki，配置_StatViewServlet配置
+      stat-view-servlet:
+        enabled: true
+        #login-username: druid
+        #login-password: druid
+
+
+#mybatis相关配置
+mybatis:
+  config-location: classpath:mybatis/SqlMapConfig.xml
+
+  
+#tcc相关配置
+tcc:
+  recover:
+    maxRetryCount: 5
+    duration: 1
+    cron: 0/5 * * * * ?
+  dataSource:
+    tb:
+      domain: REDPACKET
+      suffix: _RED
+    jdbc:
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/TCC?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+      username: root
+      password: root
+    c3p0:
+      initialPoolSize: 10
+      minPoolSize: 10
+      maxPoolSize: 30
+      acquireIncrement: 3
+      maxIdleTime: 1800
+      checkoutTimeout: 30000  

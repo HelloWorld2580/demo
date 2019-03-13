@@ -1,0 +1,3 @@
+server:
+  context-path: /msdemo-web-h5
+  port: 9002

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.ms.ims.dao.InconsistentTransactionCallDao" >
+  <resultMap type="com.dhcc.ms.ims.po.InconsistentTransaction" id="InconsistentTransaction">
+  	<id column="inconsistent_transaction_id" property="id"/>
+  	<collection property="transactions" ofType="com.dhcc.ms.ims.po.Transaction">
+  		<id column="transaction_id" property="id"/>
+  		<result column="create_time" property="createTime"/>
+  		<result column="service_name" property="serviceName"/>
+  		<result column="target_class" property="targetClass"/>
+  		<result column="method_name" property="methodName"/>
+  		<result column="args" property="args" typeHandler="com.dhcc.ms.ims.dao.handler.ObjectArraySerializatioTypeHandler"/>
+  	</collection>
+  </resultMap>
+  
+  <select id="selectInconsistentTransactions" resultMap="InconsistentTransaction">
+  	SELECT * FROM msims_inconsistent_transaction 
+  	WHERE inconsistent_transaction_id IN
+  	<foreach  collection="list" item="id" open="(" close=")" separator=",">
+  		#{id}
+  	</foreach>
+  	ORDER BY create_time
+  </select>
+  
+  <select id="selectInconsistentTransaction" resultMap="InconsistentTransaction">
+  	SELECT * FROM msims_inconsistent_transaction
+  	WHERE inconsistent_transaction_id=#{id}
+  	ORDER BY create_time
+  </select>
+</mapper>

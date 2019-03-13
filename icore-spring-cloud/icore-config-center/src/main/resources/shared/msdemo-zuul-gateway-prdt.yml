@@ -1,0 +1,20 @@
+server:
+  context-path: /msdemo
+  port: 8002
+
+zuul:
+  ignored-services: "*"
+  #ignored-patterns: /msdemo-account-service/**,/msdemo-user-service/**,/msdemo-hystrix-turbine/**,/msdemo-config-center/**,/msdemo-registry-center/**
+  routes:
+    msdemo-web-api:
+      path: /msdemo-web-api/**
+      serviceId: msdemo-web-api
+      stripPrefix: false
+    msdemo-app-api:
+      path: /msdemo-app-api/**
+      serviceId: msdemo-app-api
+      stripPrefix: false
+    msdemo-web-h5:
+      path: /msdemo-web-h5/**
+      serviceId: msdemo-web-h5
+      stripPrefix: false

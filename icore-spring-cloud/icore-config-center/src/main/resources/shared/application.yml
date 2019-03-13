@@ -1,0 +1,24 @@
+logging:
+  level: 
+    root: INFO
+    #org.springframework.security: INFO
+    org.springframework.cloud:  INFO
+    org.springframework.boot: INFO
+
+#监控相关配置  
+management:
+  security:
+    enabled: false
+    
+#Feign hystix
+feign:
+  hystrix:
+    enabled: true
+    
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
